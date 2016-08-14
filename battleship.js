@@ -117,9 +117,9 @@ function placeShips() {
     var column = Math.floor((Math.random()*10));
 
     //add and if statement to check to see if there is already a ship in the same spot
-    if (board[row][column] !== aShipIsHere || board[row][column] !== noShip) {
+    if (board[row][column] !== aShipIsHere && board[row][column] !== noShip) {
       //increments the count of ships for the while loop
-      countOfShips++
+      countOfShips++;
       //assigns the row and column to a ship position
       board[row][column] = aShipIsHere;
       //run findBlockedSpaces function
