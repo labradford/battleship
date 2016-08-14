@@ -82,44 +82,34 @@ $("#restart").on("click", function(){
 });//end of document.ready
 
 // ********** START OF MODEL **********
-//create variable for torpedos left and set it to 25
+//create variable for torpedos left and set it to 0
 var torpedosLeft = 25;
 //create the array for the board
-var board =[[0,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0]];
-
-//create variable for count of ships and set the value to 0
-var countOfShips = 0;
-//create variable for ships that have been hit and set the value to 0
+var board = [];
+//create variable for ships
+var ships = 0;
+//create variable for ships that have been hit
 var shipsHit = 0;
 //create a variable for where a ship has been placed and set the value to -1
 var aShipIsHere = -1;
 //create a variable that sets the value of the surrounding spaces to -2
-var noShip = -2
+var noShip = -2;
 
 //Purpose: create a function to place five ships randomly on the board
 //Signature: nothing ---> return 2 numbers that correspond to positions on the board
 //Example: placeShips() ----> [0,3],[1,4],[2,6],[7,5],[1,8]
 function placeShips() {
   //checks ships is less than five
-  while (countOfShips < 5 ){
+  while (ships < 5 ) {
     //finds a random number for the row
     var row = Math.floor((Math.random()*10));
     //finds a random number for the column
     var column = Math.floor((Math.random()*10));
 
-    //add and if statement to check to see if there is already a ship in the same spot
-    if (board[row][column] !== aShipIsHere && board[row][column] !== noShip) {
+    //checks to see if the random board space can have a ship
+    if (isAValidBoardSpaceToPlaceAShip(row, column)) {
       //increments the count of ships for the while loop
-      countOfShips++;
+      ships++;
       //assigns the row and column to a ship position
       board[row][column] = aShipIsHere;
       //run findBlockedSpaces function
@@ -128,93 +118,45 @@ function placeShips() {
   }
 }
 
+//Purpose: to check to see if a board space is not a ship and is not a noShip, therefore seeing if a spot is valid
+//Signature: row, col -> Bool (representing the outcome of the check)
+//Ex: isAValidBoardSpaceToPlaceAShip(0, 0) -> true (as long as there is not ships next to or already on that space)
+function isAValidBoardSpaceToPlaceAShip(row, column) {
+  //return true is space is on the grid and not a ship and is no a noShip, else returns false
+  return isOnGridAndNotAShip(row, column) && board[row][column] !== noShip;
+}
+
 //Purpose: to create a function that finds the four spaces around the ship
 //Signature:[row][column] -> [row][column][row][column] [row][column][row][column]
 //Example: findBlockedSpaces(1,1) -> 0,1 2,1 1,0 1,2
-
 function findBlockedSpaces(col, row) {
-  //sets the four spaces around inside squares to -2/noShip
-  if ((row > 0 && row < 9) &&
-      (col > 0 && col < 9) &&
-      (board[row - 1][col] != aShipIsHere) &&
-      (board[row + 1][col] != aShipIsHere) &&
-      (board[row][col - 1] != aShipIsHere) &&
-      (board[row][col + 1] != aShipIsHere)){
+  if (isOnGridAndNotAShip(row - 1, col))
     board[row - 1][col] = noShip;
+  if (isOnGridAndNotAShip(row + 1, col))
     board[row + 1][col] = noShip;
+  if (isOnGridAndNotAShip(row, col - 1))
     board[row][col - 1] = noShip;
+  if (isOnGridAndNotAShip(row, col + 1))
     board[row][col + 1] = noShip;
-  }
-  //sets the 3 spaces around the top row squares to -2/noShip
-  if (row === 0 && (col > 0 && col < 9) &&
-     (board[row + 1][col] != aShipIsHere) &&
-     (board[row][col - 1] != aShipIsHere) &&
-     (board[row][col + 1] != aShipIsHere)){
-    board[row + 1][col] = noShip;
-    board[row][col - 1] = noShip;
-    board[row][col + 1] = noShip;
-  }
-  //sets the 3 spaces around the bottom row squares to -2/noShip
-  if (row === 9 && (col > 0 && col < 9)&&
-     (board[row - 1][col] != aShipIsHere) &&
-     (board[row][col - 1] != aShipIsHere) &&
-     (board[row][col + 1] != aShipIsHere)){
-    board[row - 1][col] = noShip;
-    board[row][col - 1] = noShip;
-    board[row][col + 1] = noShip;
-  }
-  //sets the 3 spaces around the first column squares to -2/noShip
-  if ((row > 0 && row < 9) && col === 0 &&
-      (board[row - 1][col] != aShipIsHere) &&
-      (board[row + 1][col] != aShipIsHere) &&
-      (board[row][col + 1] != aShipIsHere)){
-    board[row - 1][col] = noShip;
-    board[row + 1][col] = noShip;
-    board[row][col + 1] = noShip;
-  }
-  //sets the 3 spaces around the bottom row squares to -2/noShip
-  if ((row > 0 && row < 9) && col === 9 &&
-     (board[row - 1][col] != aShipIsHere) &&
-     (board[row + 1][col] != aShipIsHere) &&
-     (board[row][col - 1] != aShipIsHere)){
-    board[row - 1][col] = noShip;
-    board[row + 1][col] = noShip;
-    board[row][col - 1] = noShip;
-  }
-  //sets the 2 spaces around a corner to -2/noShip
-  if (row === 0 && col === 0 &&
-     (board[row + 1][col] != aShipIsHere) &&
-     (board[row][col + 1] != aShipIsHere)){
-    board[row + 1][col] = noShip;
-    board[row][col + 1] = noShip;
-  }
-  //sets the 2 spaces around a corner to -2/noShip
-  if (row === 0 && col === 9 &&
-     (board[row + 1][col] != aShipIsHere) &&
-     (board[row][col - 1] != aShipIsHere)){
-    board[row + 1][col] = noShip;
-    board[row][col - 1] = noShip;
-  }
-  //sets the 2 spaces around a corner to -2/noShip
-  if (row === 9 && col === 0 &&
-     (board[row - 1][col] != aShipIsHere)&&
-     (board[row][col + 1] != aShipIsHere)){
-    board[row - 1][col] = noShip;
-    board[row][col + 1] = noShip;
-  }
-  //sets the 2 spaces around a corner to -2/noShip
-  if (row === 9 && col === 9 &&
-     (board[row - 1][col] != aShipIsHere) &&
-     (board[row][col - 1] != aShipIsHere)){
-    board[row - 1][col] = noShip;
-    board[row][col - 1] = noShip;
-  }
+}
+
+//Purpose: to check to see if a specified row and column are on the grid and not a ship
+//Signature row, col -> bool
+//Ex: isOnGridAndNotAShip(-1, 5) -> false
+function isOnGridAndNotAShip(row, col) {
+  if (row < 0 || row > 9)
+    return false;
+  if (col < 0 || col > 9)
+    return false;
+  return board[row][col] !== aShipIsHere;
 }
 
 // Purpose: to create gameBoard using loops
-// Signature: nothing -> <tr><td id="00" class="text-center"></td></tr>
-// Examples: makeBoard() -> table
+// Signature: nothing ->
+// Examples: gameBoard() -> table
 function makeBoard() {
+  //set the board js uses to default state
+  setDefaultBoard();
   //create a for loop for the tr
   for (var row=0; row<10; row++) {
     //create and append 10 tables rows to the table
@@ -222,9 +164,22 @@ function makeBoard() {
     //create a for loop for the tds
     for (var column=0; column<10; column++) {
       //create and append 10 table datas to the last row in loop
-      $("tr").last().append('<td id="' + row + column + '" class="text-center"></td>');
+      $("tr").last().append('<td id = "' + column + row + '" class = "text-center"></td>');
     }
   }
+}
+
+//Purpose: set board to default state (nothing filled)
+//Signature: Nothing -> set board to default state
+//Ex: setDefaultBoard() -> [[0,0,0...],[0,0,0...]...]
+function setDefaultBoard() {
+  board = [];
+  for (var i = 0; i < 10; i++)
+    board.push([]);
+
+  for (var r = 0; r < 10; r++)
+    for (var c = 0; c < 10; c++)
+      board[r][c] = 0;
 }
 
 // Purpose: to find the location/coordinates of the placed ships and add a class to the td
