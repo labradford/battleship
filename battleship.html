@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Battleship</title>
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="battleship.css" media="screen" title="no title" charset="utf-8">
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Fugaz+One|Squada+One|Teko' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="battleship.js"></script>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="jumbotron">
+        <!-- <h1>Battleship</h1> -->
+        </div>
+        <p class="torpedos padding">Game Rules:</p>
+        <p class="torpedos2 padding">Travel across the sea on your Battleship looking for enemy ships. You have 25 torpedos to use. Ships will not be directly above, below or to the left or right of each other. Click a square to begin your adventure. Good Luck Sailor!</p>
+        <div class="col-sm-8">
+          <table id="gameBoard">
+
+          </table>
+
+        </div>
+        <div class="col-sm-4" id="userInfo">
+          <p class="torpedos">Torpedos Left:</p>
+          <p class="torpedos" id="torpedos">25</p>
+          <p class="torpedos">Hits:</p>
+          <p class="torpedos" id="hits">0</p>
+          <p class="restart text-center" id="restart"><img src="http://u0v052dm9wl3gxo0y3lx0u44wz.wpengine.netdna-cdn.com/wp-content/uploads/2013/04/Thales-Lightweight-Multirole-Missile-LMM-01.jpg"/></p>
+          <p class="torpedos3 text-center">If you want to play again refresh the page!</p>
+          <p class="torpedos" id="winner"></p>
+          <p class="torpedos" id="loser"></p>
+          <!--<p class="torpedos2">Click the torpedo to restart the game.</p>-->
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="row">
+          <div class="col-sm-1">
+            <img id="hasbro" src="http://logok.org/wp-content/uploads/2014/10/Hasbro-logo-2013.png" alt="" />
+          </div>
+          <div class="col-sm-11" id="com">
+            © 2016 Hasbro.com All rights reserved. All audio, visual and textual content on this site (including all names, characters, images, trademarks and logos) are protected by trademark, copyrights and other Intellectual Property rights owned by Hasbro or its subsidiaries, licensors, licensees, suppliers and accounts. By using this site, you agree to the Terms and Conditions of Use.
+          </div>
+      </footer>
+    </div>
+  </body>
+</html>

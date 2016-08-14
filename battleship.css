@@ -1,0 +1,73 @@
+td {
+  border: 1px solid black;
+  height: 50px;
+  width: 50px;
+}
+
+table {
+  margin: 0 auto;
+}
+
+body {
+  background-image: url("http://cf.shacknews.com/images/20120314/battleship_screen4_21413.jpg");
+  background-size: cover;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.container {
+  background-color: white;
+}
+
+.jumbotron{
+  background-image: url("http://now.wms.com/winninglines/wp-content/uploads/2011/11/BattleshipLogo.png");
+  background-position: center;
+  background-size: cover;
+  height: 300px;
+}
+
+.grey {
+  background-color: #C0C0C0;
+}
+
+.hereTheyAre {
+  background-color: #00B894;
+}
+
+.hit {
+  background-color: #CC0000;
+}
+
+.torpedos {
+  font-size: 50px;
+  font-family: 'Teko', sans-serif;
+}
+
+.torpedos2 {
+  font-size: 30px;
+  font-family: 'Teko', sans-serif;
+}
+
+.torpedos3 {
+  font-size: 25px;
+  font-family: 'Teko', sans-serif;
+}
+
+.restart > img{
+  width: 150px;
+  height: auto;
+}
+
+.padding {
+  padding: 0 30px;
+}
+
+#hasbro {
+  padding-top: 25px;
+  height: 100px;
+  width: 100px;
+}
+
+#com {
+  padding-top: 35px;
+}
