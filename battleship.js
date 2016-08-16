@@ -3,6 +3,8 @@ $(document).ready(function(){
 
   //calls makeBoard function to create the game board grid
   makeBoard();
+  //call place a 5 ship
+  placeAFiveShip(5);
   //calls the placeShips function to place ships on the board
   placeShips();
   //call a function to set the game up upon reset
@@ -29,7 +31,7 @@ $(document).ready(function(){
         //displays the count of ships hit in the view
         $("#hits").text(shipsHit);
         //checks to see if 5 ships have been hit
-        if (shipsHit === 5 && torpedosLeft >= 0) {
+        if (shipsHit === 10 && torpedosLeft >= 0) {
           //add winning message to the dom
           $("#winner").text("You WIN!");
           //reset topedo count when game is over
@@ -44,7 +46,7 @@ $(document).ready(function(){
         decrementTorpedos();
       //printing number of torpedos left to the dom
       $("#torpedos").text(torpedosLeft);
-      if (torpedosLeft === 0 && shipsHit < 5) {
+      if (torpedosLeft === 0 && shipsHit < 10) {
         $("#loser").text("You Lose!");
         //reset torpedos left at end of game
         //torpedosLeft = 0
@@ -118,12 +120,43 @@ function placeShips() {
   }
 }
 
+// Purpose: to place a ship that takes up 5 spaces on the board horizontally
+//Signature: nothing --> return 5 row and column markers for each square of the ship and places a -1 in those spots
+//Example: placeAFiveShip() --> ([1,2],[1,3],[1,4],[1,5],[1,6])
+function placeAFiveShip(length) {
+  //finds a random number for the row
+    var row = Math.floor((Math.random()*10));
+    //finds a random number for the column
+    var column = Math.floor((Math.random()*5));
+    //checks to see if the random board space can have a ship
+    if (isAValidBoardSpaceToPlaceAShip(row, column, length)) {
+      //assigns the row and column to a ship position
+      for (var i = 0; i < length; i++) {
+      board[row][column + i] = aShipIsHere;
+      }
+      //run markAdjacentSpaces function for each of the squares where a ship is placed
+      for (var i = 0; i < length; i++) {
+        markAdjacentSpaces(column + i, row);
+      }
+      
+    }
+}
+
 //Purpose: to check to see if a board space is not a ship and is not a noShip, therefore seeing if a spot is valid
 //Signature: row, col -> Bool (representing the outcome of the check)
 //Ex: isAValidBoardSpaceToPlaceAShip(0, 0) -> true (as long as there is not ships next to or already on that space)
-function isAValidBoardSpaceToPlaceAShip(row, column) {
-  //return true is space is on the grid and not a ship and is no a noShip, else returns false
-  return isOnGridAndNotAShip(row, column) && board[row][column] !== noShip;
+function isAValidBoardSpaceToPlaceAShip(row, column, length) {
+  //create a variable for the return value and sets default to true
+  var result = true;
+  for (var i = 0; i < length; i ++) {
+    //checks to see if space is on the grid and is not a ship and is not a noShip, else returns false
+    if (!(isOnGridAndNotAShip(row, column) && board[row][column] !== noShip)) {
+      //returns false if the above condition is met
+      result = false;
+    }
+  }
+  //returns result
+  return result;
 }
 
 //Purpose: to create a function that finds the four spaces around the ship
