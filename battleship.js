@@ -54,32 +54,10 @@ $(document).ready(function(){
       }
     }
   });
-//}
-/*
-//clicking the torpedo to restart the game
-$("#restart").on("click", function(){
-  $("td").removeClass("grey");
-  $("td").removeClass("hit");
-  $("td").removeClass("hereTheyAre");
-  $("#torpedos").text(torpedosLeft);
-  board=[[0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0]];
-  torpedosLeft = 25;
-  shipsHit = 0;
-  placeShips();
-  setUpGame();
-  $("#winner").text("");
-  $("#loser").text("");
-});
-*/
+//reload the page when restart button is clicked
+  $('#restart').click(function() {
+    location.reload();
+  });
 });//end of document.ready
 
 // ********** START OF MODEL **********

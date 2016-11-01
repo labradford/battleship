@@ -9,7 +9,7 @@ table {
 }
 
 body {
-  background-image: url("http://cf.shacknews.com/images/20120314/battleship_screen4_21413.jpg");
+  background-image: url("battleshipbackground.jpg");
   background-size: cover;
   padding-top: 25px;
   padding-bottom: 25px;
@@ -19,8 +19,8 @@ body {
   background-color: white;
 }
 
-.jumbotron{
-  background-image: url("http://now.wms.com/winninglines/wp-content/uploads/2011/11/BattleshipLogo.png");
+.jumbotron {
+  background-image: url("battleshiphead.jpg");
   background-position: center;
   background-size: cover;
   height: 300px;
@@ -66,6 +66,4 @@ footer {
   padding: 50px 0;
 }
 
-#com {
-  padding-top: 35px;
-}
+
